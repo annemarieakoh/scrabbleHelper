@@ -4,9 +4,10 @@ import os
 '''
 take in:
 - list of usuable letters (scrabble rack)
+    - use dashes to represent blank tiles
 - word to be completed (target)
     - put dashes in place of unknown letters
-- word list (dictionary) of all words on a single line each
+- word list (dictionary) of all possible words on a single line each
 
 e.g. scrabbleHelper(['r', 'g', 'p', 'e', 't', 'a', 'z'], "--p---ed", "words.txt")
 
@@ -66,8 +67,8 @@ def scrabbleHelper(rack, target, dictionary):
     solutions = [word for word in solutions if word not in invalid]
     "append word score to each solution then sort solutions based on score value"
     solutions = [wordWithScore(word, scrabbleScores, usable) for word in solutions]
-    sortSolutions(solutions)
 
+    solutions = sortSolutions(solutions)
     printSolutions(solutions)
     return
 
@@ -125,7 +126,7 @@ def scrabbleHelperBlankTile(rack, target, dictionary):
         solutions = [wordWithScore(word, scrabbleScores, usable) for word in solutions if word not in invalid]
         allSolutions += solutions
 
-    sortSolutions(allSolutions)
+    allSolutions = sortSolutions(allSolutions)
     printSolutions(allSolutions)
     return
     
@@ -174,29 +175,29 @@ def letterScore(ch, scrabbleScores):
 
 def sortSolutions(sols):
     '''sorts the list of words in solutions based on their word score - highest score first'''
-    if len(sols) in [0, 1]:
-        return sols
-    for i in range(1, len(sols)):
-        curr = sols[i]
+    unique = list(set(sols))
+    if len(unique) in [0, 1]:
+        return unique
+    for i in range(1, len(unique)):
+        curr = unique[i]
         word, score_str = curr.rsplit(' - ', 1)  # split by the last occurrence of " - "
         key = int(score_str)  # convert the score part to an integer
         j = i - 1
         while j >= 0:
-            prev_word, prev_score_str = sols[j].rsplit(' - ', 1)
+            prev_word, prev_score_str = unique[j].rsplit(' - ', 1)
             prev_score = int(prev_score_str)
             if key > prev_score:
-                sols[j + 1] = sols[j]
+                unique[j + 1] = unique[j]
                 j -= 1
             else:
                 break
-        sols[j + 1] = curr
-    return
+        unique[j + 1] = curr
+    return unique
 
 
 while(True):
     board = input("Enter your Scrabble rack separated by a single space: ")
     target = input("Enter your target word: ")
-    #dic = input("Enter your word list: ")
     rack = board.split()
     if '-' in rack:
         scrabbleHelperBlankTile(rack, target, "words.txt")
