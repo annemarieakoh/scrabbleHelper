@@ -19,5 +19,13 @@ As for blank tiles within the Scrabble rack, the user will represent them with a
 For example,<br />
     Enter your Scrabble rack separated by a single space: - a k e d r s<br />
 <br />
-In traditional Scrabble games, the value of a blank tile is always 1, regardless of the letter it's used as. scrabbleHelper currently treats the blank tile score as the score of the letter it is used as. Repeated solutions have also been displayed in the blank-tile cases - this has yet to be fixed.<br />
- 
+In traditional Scrabble games, the value of a blank tile is always 1, regardless of the letter it's used as. scrabbleHelper recognizes this and treats the blank tile score as 1. However, what has yet to be accounted for are the instances of a blank tile used as a letter that already exists in the user's Scrabble rack. All Valid Solutions will still be computed, but the scores won't necessarily be accurate.<br />
+For example, the user's Scrabble rack is:<br />
+    - d e c a h<br />
+And the target word is:<br />
+    -ached<br />
+The output will be:<br />
+Valid Solutions:<br />
+cached - 14<br />
+bached - 14<br />
+But the score for "cached" should be 12 because the extra "c" (from the blank tile" should have a value of 1, not of 3 (original score of a "c" tile).
