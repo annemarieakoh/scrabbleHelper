@@ -1,7 +1,7 @@
 # scrabbleHelper
-A simple program to provide the user with a printed list of all possible words that can be played based on a certain target word in Scrabble.
-scrabbleHelper asks the user to enter their scrabble rack as a series of space-separated lowercase letters. The user is then asked to enter the target word they're trying to make. This is formatted as a number of dashes "-" to represent unknown letters, and actual known letters.
-For example, the user's Scrabble rack is:
+A simple program to provide the user with a printed list of all possible words that can be played based on a certain target word in Scrabble.<br />
+scrabbleHelper asks the user to enter their scrabble rack as a series of space-separated lowercase letters. The user is then asked to enter the target word they're trying to make. This is formatted as a number of dashes "-" to represent unknown letters, and actual known letters.<br />
+For example, the user's Scrabble rack is:<br />
     p g a o n c n
 And it is known that there is a playable word on the Scrabble board:
     --t--
